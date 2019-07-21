@@ -10,7 +10,7 @@
 
 ### Data
 #### Numta Handwritten Bengali Digits
-You can download dataset from (https://bengali.ai/datasets/).
+You can download dataset from Bengali.ai (https://bengali.ai/datasets/).
 
 
 ### Model Architecture
@@ -20,12 +20,12 @@ You can download dataset from (https://bengali.ai/datasets/).
 To train the the model, run the following command:
 
 ```python
-python train.py
+❱❱❱ python train.py
 ```
 ##### Note: To change or modify the model or parameters, see `` confiq.py ``` file
 ### Testing 
 To test the the model, run the following command:
 
 ```python
-python test.py
+❱❱❱ python test.py
 ```
