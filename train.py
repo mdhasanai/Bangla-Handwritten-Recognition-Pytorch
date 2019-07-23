@@ -1,6 +1,7 @@
 import os
 import pickle
 import torch
+import torchvision
 import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
@@ -20,6 +21,10 @@ print(f"Vocab size: {len(ids_to_char)}")
 
 def train():
 
+    # for watching in tensorboard 
+    tb = SummaryWriter()
+    
+    
     # load data
     transform= set_transform()
 
@@ -31,7 +36,15 @@ def train():
     model = Model(vocab)
     print(model)
     
+    batch = next(iter(valid_loader))
     
+    # Adding Tensorboard
+  
+    grid = torchvision.utils.make_grid(batch[0])
+    tb.add_image('images', grid, 0)
+    tb.add_graph(model,batch[0])
+   
+   
     # Defining Loss and optimizer
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=learning_rate, momentum=momentum)
@@ -47,11 +60,10 @@ def train():
         #print("Found GPU. Model Shifting to GPU")
         model.cuda()
         
-    # for watching in tensorboard 
-    tb = SummaryWriter()
+
 
     print("*"*30 + " Training Start "+ "*"*30 )
-    for e in range(1, 2):
+    for e in range(1, epoch):
         
         ## Training Start ##
         model.train()
@@ -78,14 +90,14 @@ def train():
                 avg_loss = sum(train_loss)/len(train_loss)
                 print(f"Epoch: ({e}/{epoch}) Loss: {loss} Avg Loss: {avg_loss} Accuracy: {100-loss} Avg Acc: {100-avg_loss}")
 
-            if i == 3:
-                break
 
         del image, loss, classes 
         
         avg_train_loss = sum(train_loss)/len(train_loss) 
 
-        #print(f"Epoch: {e} Training Loss: {avg_train_loss} Training Accuracy: {100-avg_train_loss}")
+        # Adding value in tensorboard
+        tb.add_scalar("Training_Loss", avg_train_loss, e)
+        tb.add_scalar("Training_Accuracy", 100-avg_train_loss, e)
 
         ## Validation Start ##
         model.eval()
@@ -102,8 +114,6 @@ def train():
             valid_loss.append(loss)
             #print(f"Loss: {loss}")
 
-            if i == 3:
-                break
         avg_valid_loss = sum(valid_loss)/len(valid_loss)
         # save if model loss is improved
         if avg_valid_loss<best_valid_loss:
@@ -121,14 +131,19 @@ def train():
         
         print(f"\t Epoch: {e} Validation Loss: {avg_valid_loss} Validation Accuracy: {100-avg_valid_loss} \n")
         
+        # Adding value in tensorboard
+        tb.add_scalar("Validation_Loss", avg_valid_loss, e)
+        tb.add_scalar("Validation_Accuracy", 100-avg_valid_loss, e)
+        
     # Saving training and validation losses so tha further graph can be generated
     save_loss = {"train":train_loss, "valid":valid_loss}
     with open(save_path+"/losses.pickle","wb") as files:
         pickle.dump(save_loss,files)
 
-tb.close()
+    tb.close()
 
-        
+
+# Start Training       
 train()
 
 
