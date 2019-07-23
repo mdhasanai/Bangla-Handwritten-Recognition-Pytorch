@@ -10,7 +10,7 @@
 
 ### Data
 #### Numta Handwritten Bengali Digits
-You can download dataset from Bengali.ai (https://bengali.ai/datasets/).
+You can download dataset from EkushNet (https://shahariarrabby.github.io/ekush/#home).
 
 
 ### Model Architecture
