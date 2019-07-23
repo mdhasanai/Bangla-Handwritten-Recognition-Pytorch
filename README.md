@@ -1,4 +1,4 @@
-## Bangla Handwritten Digit Recognition using Pytorch
+## Bangla Handwritten Characters Recognitio using Pytorch
 
 
 
@@ -9,7 +9,7 @@
 - Run ``❱❱❱  bash requirement.sh``
 
 ### Data
-#### Bangla Handwritten Characters
+#### Bangla Handwritten Characters Recognition
 You can download dataset from EkushNet (https://shahariarrabby.github.io/ekush/#home).
 After complete download, extract the images into "data" folder
 Make csv file for taining,validation and testing.
