@@ -1,3 +1,4 @@
+import os
 ##    Configuaration  ##
 batch_size = 8
 num_classes = 121
