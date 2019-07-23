@@ -34,14 +34,8 @@ To see the training progress in tensorboard, run the following command:
 ```python
 ❱❱❱ tensorboard --logdir="./runs/"
 ```
-##### Note: To change or modify the model or parameters, see `` confiq.py ``` file
+##### Note: To change or modify the model or parameters, see ``` config.py ``` file
 
-### Testing 
-To test the the model, run the following command:
-
-```python
-❱❱❱ python test.py
-```
 
 
 #### Feel free to create an issue if you (the reader) come across any problems.
