@@ -1,1 +1,1 @@
-pip install pandas numpy
+pip install pandas numpy tb-nightly
