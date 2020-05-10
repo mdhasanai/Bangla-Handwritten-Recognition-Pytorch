@@ -1,4 +1,4 @@
-## Bangla Handwritten Characters Recognitio using Pytorch
+## Bangla Handwritten Characters Recognition using Pytorch
 
 
 
